@@ -99,16 +99,27 @@ function App() {
   const [musicOn, setMusicOn] = useState(false);
   const audioRef = React.useRef(null);
 
-function toggleMusic() {
-  if (musicOn) {
-    audioRef.current?.pause();
+
+async function toggleMusic() {
+  const audio = audioRef.current;
+
+  if (!audio) return;
+
+  try {
+    if (musicOn) {
+      audio.pause();
+      setMusicOn(false);
+    } else {
+      audio.volume = 0.5;
+      await audio.play();
+      setMusicOn(true);
+    }
+  } catch (error) {
+    console.error("Music error:", error);
     setMusicOn(false);
-  } else {
-    audioRef.current?.play()
-      .then(() => setMusicOn(true))
-      .catch((err) => console.error("Music playback failed:", err));
   }
 }
+
   const [copied, setCopied] = useState(false);
 
   const progress = ((questionIndex + (showReply ? 1 : 0)) / questions.length) * 100;
