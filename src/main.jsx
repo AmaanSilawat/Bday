@@ -222,7 +222,7 @@ function nextQuestion() {
         </button>
         <div className="topbar-right">
           <span className="distance-note"><span className="live-dot" /> MADE WITH LOVE</span>
-          <audio ref={audioRef} src="/music.mp3" loop preload="auto" />
+          <audio ref={audioRef} src={`${import.meta.env.BASE_URL}music.mp3`} loop preload="auto" />
           <button className="icon-button" onClick={toggleMusic} title={musicOn ? "Turn music off" : "Play music"} aria-label="Toggle background music">
   {musicOn ? <Music2 size={17} /> : <VolumeX size={17} />}
 </button>
